@@ -30,20 +30,26 @@ extension GPU {
 
 extension GPU {
     static func getGPUs() -> [GPU]? {
-        guard let data = shellData(["system_profiler SPDisplaysDataType -xml"]) else {
-            return nil
+        if let data = shellData(["system_profiler SPDisplaysDataType -xml"]),
+           let plistArray = try? PropertyListDecoder().decode(SystemProfilerPlistArray.self, from: data)
+        {
+            let gpus: [GPU] = plistArray.first?.items.compactMap {
+                guard $0.isGPU, let deviceId = $0.deviceId else {
+                    return nil
+                }
+                return GPU(deviceId: deviceId, model: $0.model, vendor: $0.vendor)
+            } ?? []
+
+            if !gpus.isEmpty {
+                return gpus
+            }
         }
 
-        let pListDecoder = PropertyListDecoder()
-        guard let plistArray = try? pListDecoder.decode(SystemProfilerPlistArray.self, from: data) else {
-            return nil
-        }
-
-        return plistArray.first?.items.compactMap {
-            guard $0.isGPU, let deviceId = $0.deviceId else {
+        return IOHelper.getPropertyList(for: kIOAcceleratorClassName)?.compactMap {
+            guard let model = $0["model"] as? String else {
                 return nil
             }
-            return GPU(deviceId: deviceId, model: $0.model, vendor: $0.vendor)
+            return GPU(deviceId: model, model: model, vendor: nil)
         }
     }
 
@@ -56,12 +62,13 @@ extension GPU {
 
         return propertyList.compactMap {
             guard
-                let pciMatch = $0["IOPCIMatch"] as? String ?? $0["IOPCIPrimaryMatch"] as? String,
                 let statistics = $0["PerformanceStatistics"] as? [String: Any],
                 let usagePercentage = statistics["Device Utilization %"] as? Int ?? statistics["GPU Activity(%)"] as? Int
             else {
                 return nil
             }
+
+            let pciMatch = $0["IOPCIMatch"] as? String ?? $0["IOPCIPrimaryMatch"] as? String ?? ""
 
             Print("📊 statistics", statistics)
 

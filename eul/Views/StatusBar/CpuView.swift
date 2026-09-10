@@ -18,12 +18,12 @@ struct CpuView: View {
     }
 
     var texts: [String] {
-        textStore.activeComponents.map {
+        textStore.activeComponents.compactMap {
             switch $0 {
             case .usagePercentage:
                 return cpuStore.usageString
             case .temperature:
-                return cpuStore.temp?.temperatureString ?? "N/A"
+                return cpuStore.temp?.temperatureString
             case .loadAverage1Min:
                 return cpuStore.loadAverage1MinString
             case .loadAverage5Min:

@@ -419,7 +419,7 @@
 		6C5DAD072556B2FF005F67C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C5DAD082556B2FF005F67C3 /* NetworkWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NetworkWidget.entitlements; sourceTree = "<group>"; };
 		6C5DAD152556B340005F67C3 /* NetworkEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEntry.swift; sourceTree = "<group>"; };
-		6C5F853B249FACE000CF0EF8 /* eul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eul.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C5F853B249FACE000CF0EF8 /* Vela.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vela.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C5F853E249FACE000CF0EF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C5F8540249FACE000CF0EF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6C5F8542249FACE200CF0EF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -772,7 +772,7 @@
 		6C5F853C249FACE000CF0EF8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C5F853B249FACE000CF0EF8 /* eul.app */,
+				6C5F853B249FACE000CF0EF8 /* Vela.app */,
 				6C7E1EFD2552EB2600287D08 /* CpuWidgetExtension.appex */,
 				6C2688EE2556762B00FB7306 /* SharedLibrary.framework */,
 				6C45750525568DCB00A2AD84 /* MemoryWidgetExtension.appex */,
@@ -1106,8 +1106,8 @@
 				6C07E8A725167DBF00F728F9 /* LaunchAtLogin */,
 				6CF28D0825168B8200EBE9CB /* SystemKit */,
 			);
-			productName = eul;
-			productReference = 6C5F853B249FACE000CF0EF8 /* eul.app */;
+			productName = Vela;
+			productReference = 6C5F853B249FACE000CF0EF8 /* Vela.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6C7CF46D25569B8100CEC263 /* BatteryWidgetExtension */ = {
@@ -1674,7 +1674,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.0.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.SharedLibrary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.SharedLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1705,7 +1705,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.0.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.SharedLibrary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.SharedLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1733,7 +1733,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.MemoryWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.MemoryWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1759,7 +1759,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.MemoryWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.MemoryWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1785,7 +1785,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.NetworkWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.NetworkWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1811,7 +1811,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.NetworkWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.NetworkWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1956,10 +1956,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela;
+				PRODUCT_NAME = Vela;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1987,10 +1987,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela;
+				PRODUCT_NAME = Vela;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 			};
@@ -2015,7 +2015,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.BatteryWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.BatteryWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2041,7 +2041,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.BatteryWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.BatteryWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2067,7 +2067,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.CpuWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.CpuWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2093,7 +2093,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.CpuWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.CpuWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2118,7 +2118,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.SelfUpdate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.SelfUpdate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2143,7 +2143,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaosun.eul.SelfUpdate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shaoweichoy.vela.SelfUpdate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

@@ -26,14 +26,13 @@ class PreferenceStore: ObservableObject {
     }
 
     private let userDefaultsKey = "preference"
-    private let repo = "gao-sun/eul"
     private var cancellable: AnyCancellable?
     var repoURL: URL? {
-        URL(string: "https://github.com/\(repo)")
+        nil
     }
 
     var latestReleaseURL: URL? {
-        URL(string: "https://github.com/\(repo)/releases/latest")
+        nil
     }
 
     var version: String? {
@@ -62,7 +61,7 @@ class PreferenceStore: ObservableObject {
     @Published var showNetworkTopActivities = false
     @Published var cpuMenuDisplay: Preference.CpuMenuDisplay = .usagePercentage
     @Published var checkStatusItemVisibility = true
-    @Published var upgradeMethod = UpgradeMethod.showInStatusBar
+    @Published var upgradeMethod = UpgradeMethod.none
     @Published var isUpdateAvailable: Bool? = false
     @Published var checkUpdateFailed = true
     @Published var appearanceMode = Preference.appearance.auto
@@ -100,36 +99,8 @@ class PreferenceStore: ObservableObject {
     }
 
     func checkUpdate() {
-        isUpdateAvailable = nil
+        isUpdateAvailable = false
         checkUpdateFailed = false
-
-        let session = URLSession.shared
-        let url = URL(string: "https://api.github.com/repos/\(repo)/releases/latest")
-
-        if let url = url {
-            let task = session.dataTask(with: url) { data, _, error in
-                DispatchQueue.main.async {
-                    if
-                        error == nil,
-                        let version = self.version,
-                        let tagName = JSON(data as Any)["tag_name"].string,
-                        "v\(version)".compare(tagName, options: .numeric) == .orderedAscending
-                    {
-                        self.isUpdateAvailable = true
-
-                        if self.upgradeMethod == .autoUpdate {
-                            AutoUpdate.run()
-                        }
-                    } else {
-                        self.isUpdateAvailable = false
-                    }
-                }
-            }
-            task.resume()
-        } else {
-            isUpdateAvailable = false
-            checkUpdateFailed = true
-        }
     }
 
     func loadFromDefaults() {

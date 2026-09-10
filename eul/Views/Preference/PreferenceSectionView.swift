@@ -28,6 +28,17 @@ extension Preference {
                 return "ui.menu_view".localized()
             }
         }
+
+        var symbolName: String {
+            switch self {
+            case .general:
+                return "gearshape"
+            case .components:
+                return "rectangle.3.group"
+            case .menuView:
+                return "menubar.rectangle"
+            }
+        }
     }
 
     struct PreferenceSectionView: View {
@@ -39,19 +50,23 @@ extension Preference {
         }
 
         var body: some View {
-            HStack(spacing: 8) {
-                Text(section.localizedDescription)
-                    .inlineSection()
-                Spacer()
-            }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 12)
-            .background(isActive ? Color.separator : Color.clear)
-            .cornerRadius(4)
-            .contentShape(Rectangle())
-            .onTapGesture {
+            Button(action: {
                 activeSection = section
+            }) {
+                HStack(spacing: 8) {
+                    Image(systemName: section.symbolName)
+                        .frame(width: 14)
+                    Text(section.localizedDescription)
+                        .inlineSection()
+                    Spacer()
+                }
+                .foregroundColor(.primary)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .background(isActive ? Color.primary.opacity(0.08) : Color.clear)
+                .cornerRadius(6)
             }
+            .buttonStyle(PlainButtonStyle())
         }
     }
 }

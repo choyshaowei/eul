@@ -24,15 +24,11 @@ extension View {
             .padding(.horizontal, 12)
             .background(
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
-                    .stroke(Color.menuBorder.opacity(0.5), lineWidth: 1)
-                    .background(
+                    .fill(Color.controlBackground.opacity(0.72))
+                    .overlay(
                         RoundedRectangle(cornerRadius: radius, style: .continuous)
-                            .fill(Color.textBackground)
-                            .brightness(0.05)
-                            .opacity(0.5)
-                            .blur(radius: 2)
+                            .stroke(Color.primary.opacity(0.08), lineWidth: 1)
                     )
-                    .shadow(color: Color.shadow.opacity(0.1), radius: 5)
             )
     }
 }

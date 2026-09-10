@@ -24,15 +24,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationDidFinishLaunching(_: Notification) {
         let contentView = ContentView()
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+            contentRect: NSRect(x: 0, y: 0, width: 720, height: 500),
+            styleMask: [.titled, .closable, .miniaturizable, .resizable],
             backing: .buffered, defer: false
         )
         window.center()
-        window.setFrameAutosaveName("Eul Preferences")
+        window.title = "Vela"
+        window.setFrameAutosaveName("Vela Preferences")
         window.contentView = NSHostingView(rootView: contentView.withGlobalEnvironmentObjects())
         window.isReleasedWhenClosed = false
-        window.titlebarAppearsTransparent = true
+        window.titlebarAppearsTransparent = false
         window.standardWindowButton(.zoomButton)?.isHidden = true
         window.standardWindowButton(.miniaturizeButton)?.isHidden = true
         window.delegate = self

@@ -15,17 +15,36 @@ struct ContentView: View {
     @EnvironmentObject var uiStore: UIStore
 
     var body: some View {
-        HStack {
-            VStack(spacing: 4) {
+        HStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 9) {
+                    Image(systemName: "waveform.path.ecg")
+                        .foregroundColor(.secondary)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text("Vela")
+                            .font(.system(size: 16, weight: .semibold))
+                        Text("System Monitor")
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .padding(.horizontal, 12)
+                .padding(.bottom, 14)
+                Divider()
                 ForEach(Preference.Section.allCases) {
                     Preference.PreferenceSectionView(activeSection: $uiStore.activeSection, section: $0)
                 }
                 Spacer()
+                Text("Vela")
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 12)
             }
-            .padding(.vertical, 20)
+            .padding(.vertical, 18)
             .padding(.horizontal, 8)
-            .frame(width: 150)
+            .frame(width: 180)
             .background(Color.controlBackground)
+            Divider()
             ScrollView([.vertical], showsIndicators: !Info.isBigSur) {
                 VStack(alignment: .leading, spacing: 12) {
                     if uiStore.activeSection == .general {
@@ -58,12 +77,12 @@ struct ContentView: View {
                     }
                     Spacer()
                 }
-                .padding(.vertical, 12)
-                .padding(.horizontal, 20)
+                .padding(.vertical, 24)
+                .padding(.horizontal, 28)
             }
             .clipped()
         }
-        .frame(height: 420)
+        .frame(minWidth: 720, maxWidth: .infinity, minHeight: 500, maxHeight: .infinity)
         .id(preferenceStore.language)
         .preferredColorScheme()
     }

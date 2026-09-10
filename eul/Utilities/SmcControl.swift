@@ -75,6 +75,10 @@ class SmcControl: Refreshable {
     }
 
     @objc func refresh() {
+        defer {
+            NotificationCenter.default.post(name: .StoreShouldRefresh, object: nil)
+        }
+
         guard smcEnabled else { return }
         for sensor in sensors {
             do {
@@ -92,7 +96,6 @@ class SmcControl: Refreshable {
                 maxSpeed: $0.maxSpeed
             )
         }
-        NotificationCenter.default.post(name: .StoreShouldRefresh, object: nil)
     }
 }
 
