@@ -16,6 +16,7 @@ class SmcControl: Refreshable {
     var sensors: [TemperatureData] = []
     var fans: [FanData] = []
     var tempUnit: TemperatureUnit = .celius
+    private var smcEnabled = false
     var cpuDieTemperature: Double? {
         sensors.first(where: { $0.sensor.name == "CPU_0_DIE" })?.temp
     }
@@ -41,6 +42,11 @@ class SmcControl: Refreshable {
     }
 
     init() {
+        guard SMCKit.isAvailable else {
+            print("SMC unavailable: sensor features are disabled on this machine.")
+            return
+        }
+
         do {
             try SMCKit.open()
             sensors = try SMCKit.allKnownTemperatureSensors().map { .init(sensor: $0) }
@@ -49,6 +55,7 @@ class SmcControl: Refreshable {
                 minSpeed: try? SMCKit.fanMinSpeed($0),
                 maxSpeed: try? SMCKit.fanMaxSpeed($0)
             ) }
+            smcEnabled = true
         } catch {
             print("SMC init error", error)
         }
@@ -63,10 +70,12 @@ class SmcControl: Refreshable {
     }
 
     func close() {
+        guard smcEnabled else { return }
         SMCKit.close()
     }
 
     @objc func refresh() {
+        guard smcEnabled else { return }
         for sensor in sensors {
             do {
                 sensor.temp = try SMCKit.temperature(sensor.sensor.code, unit: tempUnit)

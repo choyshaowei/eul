@@ -301,11 +301,41 @@ public enum SMCKit {
     /// Connection to the SMC driver
     fileprivate static var connection: io_connect_t = 0
 
+    /// Service names used by AppleSMC across macOS generations.
+    private static let serviceNames = ["AppleSMC", "AppleSMCLMU"]
+
+    private static var iokitPort: mach_port_t {
+        if #available(macOS 12.0, *) {
+            return kIOMainPortDefault
+        }
+
+        return kIOMasterPortDefault
+    }
+
+    /// Best effort check to quickly detect whether the machine exposes an SMC
+    /// interface available to this API.
+    public static var isAvailable: Bool {
+        let service = findSMCService()
+        guard service != 0 else { return false }
+        IOObjectRelease(service)
+        return true
+    }
+
+    fileprivate static func findSMCService() -> io_service_t {
+        for serviceName in serviceNames {
+            let service = IOServiceGetMatchingService(iokitPort, IOServiceMatching(serviceName))
+            if service != 0 { return service }
+        }
+
+        return 0
+    }
+
     /// Open connection to the SMC driver. This must be done first before any
     /// other calls
     public static func open() throws {
-        let service = IOServiceGetMatchingService(kIOMasterPortDefault,
-                                                  IOServiceMatching("AppleSMC"))
+        if connection != 0 { return }
+
+        let service = findSMCService()
 
         if service == 0 { throw SMCError.driverNotFound }
 
@@ -313,13 +343,18 @@ public enum SMCKit {
                                    &SMCKit.connection)
         IOObjectRelease(service)
 
-        if result != kIOReturnSuccess { throw SMCError.failedToOpen }
+        if result != kIOReturnSuccess {
+            SMCKit.connection = 0
+            throw SMCError.failedToOpen
+        }
     }
 
     /// Close connection to the SMC driver
     @discardableResult
     public static func close() -> Bool {
+        guard connection != 0 else { return true }
         let result = IOServiceClose(SMCKit.connection)
+        if result == kIOReturnSuccess { SMCKit.connection = 0 }
         return result == kIOReturnSuccess ? true : false
     }
 
